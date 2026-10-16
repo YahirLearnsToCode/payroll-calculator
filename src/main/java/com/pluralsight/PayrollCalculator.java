@@ -15,20 +15,25 @@ public class PayrollCalculator {
         System.out.print("Enter your pay rate: ");
         double payrate = Double.parseDouble(myScanner.nextLine());
 
-        //Calculating gross pay
-        double grossPay = hoursWorked * payrate;
+        calculatePayrate(name, hoursWorked, payrate);
+    }
 
-        // + Optional work
-        double otPayrate = 0;
+    //Calculating gross pay
+    public static double calculateGrossPay(double hoursWorked, double payrate) {
+        return hoursWorked * payrate;
+    }
 
-        if(hoursWorked > 40 ){
+    public static void calculatePayrate(String name, double hoursWorked, double payrate) {
+        double otPayrate;
+
+        // Calculating OT
+        if (hoursWorked > 40) { //Displaying info with OT
             double otHours = hoursWorked - 40;
             otPayrate = (40 * payrate) + otHours * (payrate * 1.5);
             System.out.println("Hello " + name + "! Your gross pay is: " + otPayrate + " with overtime!");
-        }
-        else {
-            //Displaying info
-            System.out.println("Hello " + name + "! Your gross pay is: " + grossPay);
+
+        } else { //Displaying info with no OT
+            System.out.println("Hello " + name + "! Your gross pay is: " + calculateGrossPay(hoursWorked, payrate));
         }
     }
 }
