@@ -7,15 +7,26 @@ public class PayrollCalculator {
 
         Scanner myScanner = new Scanner(System.in);
 
-        // Prompting user for information
-        System.out.print("Enter your name: ");
-        String name = myScanner.nextLine();
-        System.out.print("Enter your hours worked: ");
-        double hoursWorked = Double.parseDouble(myScanner.nextLine());
-        System.out.print("Enter your pay rate: ");
-        double payrate = Double.parseDouble(myScanner.nextLine());
+        // Prompting user for information using methods
+        String name = getName(myScanner);
+
+        double hoursWorked = getHoursWorked("Enter your hours worked: ", myScanner);
+
+        double payrate = getHoursWorked("Enter your pay rate: ", myScanner);
 
         calculatePayrate(name, hoursWorked, payrate);
+    }
+
+    public static double getHoursWorked(String s, Scanner myScanner) {
+        System.out.print(s);
+        double hoursWorked = Double.parseDouble(myScanner.nextLine());
+        return hoursWorked;
+    }
+
+    public static String getName(Scanner myScanner) {
+        System.out.print("Enter your name: ");
+        String name = myScanner.nextLine();
+        return name;
     }
 
     //Calculating gross pay
@@ -23,6 +34,7 @@ public class PayrollCalculator {
         return hoursWorked * payrate;
     }
 
+    // Payrate math with over time
     public static void calculatePayrate(String name, double hoursWorked, double payrate) {
         double otPayrate;
 
@@ -36,4 +48,5 @@ public class PayrollCalculator {
             System.out.println("Hello " + name + "! Your gross pay is: " + calculateGrossPay(hoursWorked, payrate));
         }
     }
+    
 }
